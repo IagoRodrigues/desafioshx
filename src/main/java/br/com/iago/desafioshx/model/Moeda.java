@@ -2,24 +2,131 @@ package br.com.iago.desafioshx.model;
 
 import java.sql.Timestamp;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
 /**
- * This class represents a currency with
- * highest value and the timestamp of the requisition.
+ * <h1>This class represents a currency</h1>
  * 
- * Labels:
- * high = maximum value
- * timestamp = timestamp
+ * Labels:</br>
+ * Code: currency from</br>
+ * Codein: currency to</br>
+ * Example:</br>
+ * Code: USD, Codein: BRL = USD to BRL</br>
+ * 
+ * Name: Name of currency in PT-BR</br>
+ * high: maximum value</br>
+ * low: lowest value</br>
+ * varBid: variation</br>
+ * pctChange: percent variation</br>
+ * bid: buy value</br>
+ * ask: sell value</br>
+ * timestamp: timestamp from data creation</br>
+ * create_date: date of data creation</br>
  */
+@Entity
 public class Moeda {
+	
+	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+	private String code;
+	private String codein;
+	private String name;
 	private double high;
-	private Timestamp timestamp;
+	private double low;
+	private double varBid;
+	private double pctChange;
+	private double bid;
+	private double ask;
+	private Timestamp timeStamp;
 		
-	public Moeda(double high, Timestamp timestamp) {
+	public Moeda(double high, Timestamp timeStamp) {
 		super();
 		this.high = high;
-		this.timestamp = timestamp;
+		this.timeStamp = timeStamp;
 	}
-	
+		
+	public Moeda(String code, String codein, String name, double high, double low, double varBid, double pctChange,
+			double bid, double ask, Timestamp timeStamp) {
+		super();
+		this.code = code;
+		this.codein = codein;
+		this.name = name;
+		this.high = high;
+		this.low = low;
+		this.varBid = varBid;
+		this.pctChange = pctChange;
+		this.bid = bid;
+		this.ask = ask;
+		this.timeStamp = timeStamp;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
+	}
+
+	public String getCodein() {
+		return codein;
+	}
+
+	public void setCodein(String codein) {
+		this.codein = codein;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public double getLow() {
+		return low;
+	}
+
+	public void setLow(double low) {
+		this.low = low;
+	}
+
+	public double getVarBid() {
+		return varBid;
+	}
+
+	public void setVarBid(double varBid) {
+		this.varBid = varBid;
+	}
+
+	public double getPctChange() {
+		return pctChange;
+	}
+
+	public void setPctChange(double pctChange) {
+		this.pctChange = pctChange;
+	}
+
+	public double getBid() {
+		return bid;
+	}
+
+	public void setBid(double bid) {
+		this.bid = bid;
+	}
+
+	public double getAsk() {
+		return ask;
+	}
+
+	public void setAsk(double ask) {
+		this.ask = ask;
+	}
+
 	public double getHigh() {
 		return high;
 	}
@@ -27,17 +134,17 @@ public class Moeda {
 		this.high = high;
 	}
 	public Timestamp getTimestamp() {
-		return timestamp;
+		return timeStamp;
 	}
-	public void setTimestamp(Timestamp timestamp) {
-		this.timestamp = timestamp;
+	public void setTimestamp(Timestamp timeStamp) {
+		this.timeStamp = timeStamp;
 	}
 	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((timestamp == null) ? 0 : timestamp.hashCode());
+		result = prime * result + ((timeStamp == null) ? 0 : timeStamp.hashCode());
 		return result;
 	}
 	
@@ -50,10 +157,10 @@ public class Moeda {
 		if (getClass() != obj.getClass())
 			return false;
 		Moeda other = (Moeda) obj;
-		if (timestamp == null) {
-			if (other.timestamp != null)
+		if (timeStamp == null) {
+			if (other.timeStamp != null)
 				return false;
-		} else if (!timestamp.equals(other.timestamp))
+		} else if (!timeStamp.equals(other.timeStamp))
 			return false;
 		return true;
 	}
