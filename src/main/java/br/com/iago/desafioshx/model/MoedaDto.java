@@ -12,15 +12,15 @@ import java.util.stream.Collectors;
  *timestamp = timestamp from data creation</br>
  *
  */
-public class MoedaDto {
+public class MoedaDTO {
 	
 	private double high;
-	private Timestamp timeStamp;
+	private Timestamp time_stamp;
 	
-	public MoedaDto(Moeda moeda) {
+	public MoedaDTO(Moeda moeda) {
 		super();
 		this.high = moeda.getHigh();
-		this.timeStamp = moeda.getTimestamp();
+		this.time_stamp = moeda.getTimestamp();
 	}
 		
 	public double getHigh() {
@@ -28,11 +28,10 @@ public class MoedaDto {
 	}
 
 	public Timestamp getTimestamp() {
-		return timeStamp;
+		return time_stamp;
 	}
 
-	public static List<MoedaDto> converter(List<Moeda> moedas) {
-		return moedas.stream().map(MoedaDto::new).collect(Collectors.toList());
+	public static List<MoedaDTO> converter(List<Moeda> moedas) {
+		return moedas.stream().map(MoedaDTO::new).collect(Collectors.toList());
 	}
-
 }

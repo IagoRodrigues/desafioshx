@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import lombok.Builder;
+import lombok.Data;
+
 /**
  * <h1>This class represents a currency</h1>
  * 
@@ -27,6 +30,8 @@ import javax.persistence.Id;
  * create_date: date of data creation</br>
  */
 @Entity
+@Data
+@Builder
 public class Moeda {
 	
 	@Id @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -40,7 +45,7 @@ public class Moeda {
 	private double pctChange;
 	private double bid;
 	private double ask;
-	private Timestamp timeStamp;
+	private Timestamp time_stamp;
 	
 	public String getCode() {
 		return code;
@@ -109,24 +114,27 @@ public class Moeda {
 	public double getHigh() {
 		return high;
 	}
+	
 	public void setHigh(double high) {
 		this.high = high;
 	}
+
 	public Timestamp getTimestamp() {
-		return timeStamp;
-	}
-	public void setTimestamp(Timestamp timeStamp) {
-		this.timeStamp = timeStamp;
+		return time_stamp;
 	}
 	
+	public void setTimestamp(Timestamp time_stamp) {
+		this.time_stamp = time_stamp;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((timeStamp == null) ? 0 : timeStamp.hashCode());
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		return result;
 	}
-	
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -136,10 +144,10 @@ public class Moeda {
 		if (getClass() != obj.getClass())
 			return false;
 		Moeda other = (Moeda) obj;
-		if (timeStamp == null) {
-			if (other.timeStamp != null)
+		if (id == null) {
+			if (other.id != null)
 				return false;
-		} else if (!timeStamp.equals(other.timeStamp))
+		} else if (!id.equals(other.id))
 			return false;
 		return true;
 	}
