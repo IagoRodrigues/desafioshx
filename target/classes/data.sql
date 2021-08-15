@@ -1,24 +1,11 @@
-Create table moedas(
-	varBid numeric(5,4),
-	code char(3),
-	codein char(3),
-	name varchar(255),
-	high numeric(10,4),
-	low numeric(10,4),
-	pctChange numeric(5,4),
-	bid numeric(10,4),
-	ask numeric(10,4),
-	timeStamp timestamp
-);
+insert into moeda(id, ask, bid, code, codein, high, low, name, pct_change, time_stamp, var_bid)
+values (1, 3.8671, 3.8659, 'USD', 'BRL', 3.8906, 3.8596, 'Dólar Americano/Real Brasileiro', -0.37, '2019-04-15 17:35:43', -0.0143);
 
-insert into moedas(varBid, code, codein, name, high, low, pctChange, bid, ask, timeStamp)
-values (-0.0143, 'USD', 'BRL', 'Dólar Americano/Real Brasileiro', 3.8906, 3.8596, -0.37, 3.8659, 3.8671, '2019-04-15 17:35:43');
+insert into moeda(id, ask, bid, code, codein, high, low, name, pct_change, time_stamp, var_bid)
+values (2, 3.8671, 3.8659, 'USD', 'BRL', 3.8906, 3.8596, 'OUTRA MOEDA 1', -0.37, '2019-04-15 17:35:43', -0.0143);
 
-insert into moedas(varBid, code, codein, name, high, low, pctChange, bid, ask, timeStamp)
-values (-0.0143, 'USD', 'BRL', 'OUTRA MOEDA 1', 3.8906, 3.8596, -0.37, 3.8659, 3.8671, '2019-04-15 17:35:43');
+insert into moeda(id, ask, bid, code, codein, high, low, name, pct_change, time_stamp, var_bid)
+values (3, 3.8671, 3.8659, 'USD', 'BRL', 3.8906, 3.8596, 'OUTRA MOEDA 2', -0.37, '2019-04-15 17:35:43', -0.0143);
 
-insert into moedas(varBid, code, codein, name, high, low, pctChange, bid, ask, timeStamp)
-values (-0.0143, 'USD', 'BRL', 'OUTRA MOEDA 2', 3.8906, 3.8596, -0.37, 3.8659, 3.8671, '2019-04-15 17:35:43');
-
-insert into moedas(varBid, code, codein, name, high, low, pctChange, bid, ask, timeStamp)
-values (-0.0143, 'USD', 'BRL', 'OUTRA MOEDA 3', 3.8906, 3.8596, -0.37, 3.8659, 3.8671, '2019-04-15 17:35:43');
+insert into moeda(id, ask, bid, code, codein, high, low, name, pct_change, time_stamp, var_bid)
+values (4, 3.8671, 3.8659, 'USD', 'BRL', 3.8906, 3.8596, 'OUTRA MOEDA 3', -0.37, '2019-04-15 17:35:43', -0.0143);

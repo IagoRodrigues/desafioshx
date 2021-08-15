@@ -41,28 +41,7 @@ public class Moeda {
 	private double bid;
 	private double ask;
 	private Timestamp timeStamp;
-		
-	public Moeda(double high, Timestamp timeStamp) {
-		super();
-		this.high = high;
-		this.timeStamp = timeStamp;
-	}
-		
-	public Moeda(String code, String codein, String name, double high, double low, double varBid, double pctChange,
-			double bid, double ask, Timestamp timeStamp) {
-		super();
-		this.code = code;
-		this.codein = codein;
-		this.name = name;
-		this.high = high;
-		this.low = low;
-		this.varBid = varBid;
-		this.pctChange = pctChange;
-		this.bid = bid;
-		this.ask = ask;
-		this.timeStamp = timeStamp;
-	}
-
+	
 	public String getCode() {
 		return code;
 	}
