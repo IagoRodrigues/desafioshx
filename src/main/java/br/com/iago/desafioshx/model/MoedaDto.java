@@ -7,9 +7,9 @@ import java.util.stream.Collectors;
 /**
  * <h1>This class is a DTO = Data Transfer Object</h1>
  * 
- *Just to send the right attributes to the database.</br>
- *high = highest value</br>
- *timestamp = timestamp from data creation</br>
+ * Just to send the right attributes from the database to front.</br>
+ * high = highest value</br>
+ * timestamp = timestamp from data creation</br>
  *
  */
 public class MoedaDTO {
@@ -30,7 +30,14 @@ public class MoedaDTO {
 	public Timestamp getTimestamp() {
 		return time_stamp;
 	}
-
+	
+	/**
+	 * This method convert a Moeda to MoedaDTO and returns a list
+	 * of this type.</br>
+	 * 
+	 * @param moedas
+	 * @return list of MoedaDTO with value and timeStamp
+	 */
 	public static List<MoedaDTO> converter(List<Moeda> moedas) {
 		return moedas.stream().map(MoedaDTO::new).collect(Collectors.toList());
 	}

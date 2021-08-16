@@ -27,7 +27,7 @@ import lombok.Data;
  * bid: buy value</br>
  * ask: sell value</br>
  * timestamp: timestamp from data creation</br>
- * create_date: date of data creation</br>
+ *
  */
 @Entity
 @Data
