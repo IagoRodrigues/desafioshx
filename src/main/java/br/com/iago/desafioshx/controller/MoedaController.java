@@ -9,7 +9,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -30,7 +34,11 @@ import br.com.iago.desafioshx.repository.MoedaRepository;
  * 
  */
 @RestController
+@Component @EnableScheduling 
 public class MoedaController {
+	
+	private final long SEGUNDO = 1000;
+	private final long MINUTO = SEGUNDO * 60;
 	
 	@Autowired
 	private MoedaRepository moedaRepository;
@@ -43,7 +51,7 @@ public class MoedaController {
 	 * 
 	 * @return MoedaDTO with value and timeStamp
 	 */
-	@RequestMapping("/listarCotacoes")
+	@RequestMapping(value = "/listarCotacoes" , method = RequestMethod.GET)
 	public List<MoedaDTO> listarCotacoes() {
 		List<Moeda> cotacoes = moedaRepository.findAll();
 		return MoedaDTO.converter(cotacoes);
@@ -57,7 +65,7 @@ public class MoedaController {
 	 * @param dataFinal (To date)
 	 * @return  MoedaDTO with value and timeStamp
 	 */
-	@RequestMapping("/filtroPorData/date")
+	@RequestMapping(value = "/filtroPorData/date" , method = RequestMethod.GET)
 	public ResponseEntity<List<MoedaDTO>> listarPorData(@RequestParam("dataInicial") @DateTimeFormat(pattern="dd-MM-yyyyHH:mm:ss") Date dataInicial,
 			@RequestParam("dataFinal") @DateTimeFormat(pattern="dd-MM-yyyyHH:mm:ss") Date dataFinal){
 		
@@ -75,7 +83,7 @@ public class MoedaController {
 	 * @param dataFinal (To date)
 	 * @return MoedaDTO with value and timeStamp
 	 */
-	@RequestMapping("/filtroPorData/string")
+	@RequestMapping(value = "/filtroPorData/string" , method = RequestMethod.GET)
 	public ResponseEntity<List<MoedaDTO>> listarPorData(@RequestParam("dataInicial") String dataInicial,
 			@RequestParam("dataFinal") String dataFinal){
 		List<Moeda> cotacoes = null;
@@ -99,8 +107,20 @@ public class MoedaController {
 	 * 
 	 * @return Moeda from external API
 	 */
-	@RequestMapping("/listarCotacaoAtual")
+	@RequestMapping(value = "/listarCotacaoAtual" , method = RequestMethod.GET)
 	public List<Moeda> listarCotacaoAtual() {
 		return feign.getMoeda();
+	}
+	
+	/**
+	 * This method calls listarCotacaoAtual(), which return a list of Moeda. </br> 
+	 * Then it takes the first position of the list and 
+	 * saves it in the database.</br>
+	 * 
+	 * We are using Schedule to control time and makes one call per minute.</br>
+	 */
+	@Scheduled(fixedDelay = MINUTO) 
+	public void inserirMoeda() {
+		moedaRepository.save(listarCotacaoAtual().get(0));
 	}
 }
